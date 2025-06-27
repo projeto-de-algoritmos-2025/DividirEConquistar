@@ -28,6 +28,26 @@ reveal_count = 0
 inversion_timer = 0
 last_check = time.time()
 
+lives = INITIAL_LIVES 
+
+
+def reset_game():
+    global enemies, cannon_pos, bullet_active, bullet_y
+    global start_time, reveal_values, reveal_start_time, reveal_count
+    global inversion_timer, last_check
+
+    enemies = random.sample(original_enemies, NUM_ENEMIES)
+    cannon_pos = NUM_ENEMIES // 2
+    bullet_active = False
+    bullet_y = cannon_y
+    start_time = time.time()
+    reveal_values = False
+    reveal_start_time = None
+    reveal_count = 0
+    inversion_timer = 0
+    last_check = time.time()
+
+
 def count_inversions(arr):
     values = [x[0] for x in arr]
 
@@ -58,6 +78,7 @@ def count_inversions(arr):
     _, total_inversions = merge_sort(values)
     return total_inversions
 
+
 def draw_game():
     global reveal_values, reveal_start_time
 
@@ -74,7 +95,7 @@ def draw_game():
         y = HEIGHT // 2
         pygame.draw.circle(WIN, color, (x, y), 30)
         if reveal_values:
-            text = FONT.render(str(val), True, WHITE)
+            text = FONT.render(str(val), True, BLACK)
             text_rect = text.get_rect(center=(x, y))
             WIN.blit(text, text_rect)
 
@@ -88,13 +109,16 @@ def draw_game():
     elapsed_time = round(time.time() - start_time, 2)
     info = FONT.render(f"Inversões: {inv_count}", True, WHITE)
     timer = FONT.render(f"Tempo: {elapsed_time:.2f}s", True, WHITE)
+    lives_text = FONT.render(f"Vidas: {lives}", True, WHITE)
     WIN.blit(info, (10, 10))
     WIN.blit(timer, (10, 40))
+    WIN.blit(lives_text, (WIDTH - 120, 10))
 
     inst = FONT.render("Setas = mover | Espaço = atirar | R = revelar", True, WHITE)
     WIN.blit(inst, (10, HEIGHT - 30))
 
     pygame.display.update()
+
 
 def victory_screen(time_taken):
     WIN.fill(BLACK)
@@ -110,10 +134,23 @@ def victory_screen(time_taken):
         txt = FONT.render(f"#{i+1}: {t:.2f}s", True, WHITE)
         WIN.blit(txt, (WIDTH // 2 - 60, HEIGHT // 2 - 20 + i * 30))
 
+    continue_msg = FONT.render("Pressione a tecla enter para jogar novamente", True, WHITE)
+    WIN.blit(continue_msg, (WIDTH // 2 - 180, HEIGHT // 2 + 160))
+
     pygame.display.update()
-    pygame.time.delay(5000)
-    pygame.quit()
-    exit()
+
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN: 
+                    waiting = False
+            elif event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
+    reset_game()
+
 
 def game_over():
     WIN.fill(BLACK)
@@ -125,8 +162,10 @@ def game_over():
     pygame.quit()
     exit()
 
+
 def game_loop():
-    global cannon_pos, bullet_active, bullet_y, reveal_values, reveal_start_time, reveal_count, inversion_timer, last_check, enemies
+    global cannon_pos, bullet_active, bullet_y, reveal_values, reveal_start_time
+    global reveal_count, inversion_timer, last_check, enemies, lives
 
     clock = pygame.time.Clock()
     running = True
@@ -171,7 +210,11 @@ def game_loop():
             last_check = now
 
             if inversion_timer >= MAX_INV_TIME:
-                game_over()
+                lives -= 1
+                if lives <= 0:
+                    game_over()
+                else:
+                    reset_game()
 
     pygame.quit()
 
