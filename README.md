@@ -17,8 +17,8 @@ Bubble Invaders Ã© um jogo arcade em Python usando `pygame`, onde seu objetivo Ã
 ---
 
 ## Screenshots
-![Tela Inicial](img/telaInicial.png)
 ![Jogo](img/jogo.png)
+![Revelar](img/reveal.png)
 ![Placar](img/placar.png)
 
 ---
