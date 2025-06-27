@@ -1,8 +1,25 @@
-# DividirEConquistar
+# D&C
 
-# 🎯 Bubble Invaders
+**Número da Lista**: 4 <br>
+**Conteúdo da Disciplina**: Dividir e Conquistar <br>
+
+## Alunos
+|Matrícula | Aluno |
+| -- | -- |
+| 211042327  |  Carlos Gabriel Cardoso Ramos |
+| 202016604  |  João Lucas Miranda de Sousa |
+
+## Sobre
+### 🎯 Bubble Invaders
 
 Bubble Invaders é um jogo arcade em Python usando `pygame`, onde seu objetivo é **organizar os inimigos numerados em ordem crescente**. Cada inimigo é representado por uma bolha colorida com um número escondido. Para vencer, é necessário realizar trocas estratégicas com o canhão e ordenar todas as bolhas!
+
+---
+
+## Screenshots
+![Tela Inicial](img/telaInicial.png)
+![Jogo](img/jogo.png)
+![Placar](img/placar.png)
 
 ---
 
@@ -47,6 +64,7 @@ python3 main.py
 - O número de **inversões** (pares fora de ordem) é constantemente monitorado.
 - Se houver **muita desordem por muito tempo**, você perde.
 - O tempo de conclusão é registrado e os 5 melhores tempos aparecem na tela de vitória.
+- O jogador vence quando todas as bolhas estiverem ordenadas em ordem crescente da esquerda para a direita (ou seja, 0 inversões restantes).
 
 ---
 
