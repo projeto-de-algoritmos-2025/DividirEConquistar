@@ -1,4 +1,4 @@
-# D&C
+# DividirEConquistar
 
 **Número da Lista**: 4 <br>
 **Conteúdo da Disciplina**: Dividir e Conquistar <br>
@@ -87,8 +87,7 @@ game/
 
 ---
 
-## 📜 Licença
-
-Este projeto é livre para fins educacionais. Se for utilizar ou adaptar, considere dar créditos.
+## Outros
+[![Vídeo explicativo](https://img.youtube.com/vi/dywRW1F_7NY/maxresdefault.jpg)](https://youtu.be/dywRW1F_7NY)
 
 ---
